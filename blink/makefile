@@ -19,7 +19,7 @@ HEX=$(DIST)/$(PRG).hex
 # Targets
 # -------------------
 
-default: $(HEX) dump asm size
+default: init $(HEX) dump asm size
 
 $(OBJ): $(SRC)/$(PRG).c $(SRC)/$(PRG).h
 	$(CC) $(CFLAGS) -o $(OBJ) -c $(SRC)/$(PRG).c
@@ -45,5 +45,8 @@ asm:
 size: $(ELF)
 	avr-size -C --mcu=$(MCU) $(ELF)
 
+init:
+	mkdir -p dist
+
 clean: 
-	rm -rf dist/*
+	rm -rf dist/
